@@ -1,29 +1,36 @@
-import { Container } from "@mui/material"
-import CardWithList from "../component/CardWithList"
+import { Checkbox, Container, FormControlLabel, FormGroup, FormLabel, TextField } from "@mui/material"
 import LinkButton from "../component/LinkButton"
 import TitleAndSubHeader from "../component/TitleAndSubHeader"
+
 export default function Home() {
-  return (
-    <Container maxWidth="xl" style={
-      {
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        textAlign: "center",
-      }
-    }>
-      <TitleAndSubHeader title="Escala Grupo de Louvor V IPM" subHeader="Fevereiro" />
+    return (
+        <Container maxWidth="sm" style={
+            {
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                height: "100vh"
+            }
+        }>
+            <TitleAndSubHeader title="Cadastrar-se para Escala VIPM" subHeader="Fevereiro" />
+            <LinkButton href="/listagem" text="Listagem" colorStyle="secondary" />
 
-      <LinkButton href="/cadastrar" text="Cadastrar-se" colorStyle="primary" />
+            <TextField name="name" label="Seu nome" variant="filled" />
+            <br/>
+            <FormGroup>
+                <FormLabel component="legend">Disponibilidades</FormLabel>
+                <FormControlLabel control={<Checkbox />} label="Domingo - 05/02/2023" />
+                <FormControlLabel control={<Checkbox />} label="Domingo - 12/02/2023" />
+                <FormControlLabel control={<Checkbox />} label="Domingo - 19/02/2023" />
+                <FormControlLabel control={<Checkbox />} label="Domingo - 26/02/2023" />
+                <FormControlLabel control={<Checkbox />} label="Aniversario V IPM - 25/02/2023" />
 
-      <CardWithList title="Domingo" subtitle="05/02/2023" items={["Cantor 1", "Cantor 2", "Cantor 3"]} />
-      <CardWithList title="Domingo" subtitle="12/02/2023" items={["Cantor 1", "Cantor 2", "Cantor 3"]} />
-      <CardWithList title="Domingo" subtitle="19/02/2023" items={["Cantor 1", "Cantor 2", "Cantor 3"]} />
-      <CardWithList title="Domingo" subtitle="26/02/2023" items={["Cantor 1", "Cantor 2", "Cantor 3"]} />
-      <CardWithList title="Aniversario V IPM" subtitle="26/02/2023" items={["Cantor 1", "Cantor 2", "Cantor 3"]} />
+            </FormGroup>
 
+            <LinkButton href="/" text="Cadastrar" colorStyle="primary" />
+            
 
-    </Container>
-  )
+        </Container>
+    )
 }
