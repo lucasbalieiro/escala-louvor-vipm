@@ -15,7 +15,7 @@ export default function Listagem() {
     }>
       <TitleAndSubHeader title="Escala Grupo de Louvor V IPM" subHeader="Fevereiro" />
 
-      <LinkButton href="/cadastrar" text="Cadastrar-se" colorStyle="primary" />
+      <LinkButton href="/" text="Cadastrar-se" colorStyle="primary" />
 
       <CardWithList title="Domingo" subtitle="05/02/2023" items={["Cantor 1", "Cantor 2", "Cantor 3"]} />
       <CardWithList title="Domingo" subtitle="12/02/2023" items={["Cantor 1", "Cantor 2", "Cantor 3"]} />
