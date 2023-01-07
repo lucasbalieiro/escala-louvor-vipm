@@ -41,7 +41,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     
         if (req.method === 'POST') {
     
-            const { name, events } = req.body;
+            const { name, events, role } = req.body;
+
+            console.log(name, events, role);
     
             const db = await connectToDatabase(process.env.MONGODB_URI);
     
@@ -49,7 +51,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
             await collection.insertOne({
                 name,
-                events
+                events,
+                role
             });
 
             res.status(201).json({ message: 'Subscription inserted!' });

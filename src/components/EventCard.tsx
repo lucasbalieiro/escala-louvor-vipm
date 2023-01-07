@@ -7,6 +7,7 @@ type EventData = {
 
 type SubscriptionData = {
   name: string;
+  role: string;
   events: EventData[];
 }
 
@@ -23,9 +24,9 @@ export default function EventCard({ eventName, date, subscriptions }: EventCardP
         <Card.Title>{eventName}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">{date}</Card.Subtitle>
         <Card.Text>
-          {subscriptions.map((subscription, index) => (
+          {subscriptions.sort((a, b) => a.role.localeCompare(b.role)).map((subscription, index) => (
             subscription.events.map((event, index) => (
-              event.date === date && <span style={{display: "block"}} key={index}>{subscription.name}</span>
+              event.date === date && <span style={{display: "block"}} key={index}>{subscription.name} - {subscription.role}</span>
             ))
           ))}
         </Card.Text>

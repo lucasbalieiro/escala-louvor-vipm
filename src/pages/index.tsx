@@ -13,6 +13,7 @@ export default function Home() {
 
     const [events, setEvents] = useState([] as EventType[])
     const [name, setName] = useState("")
+    const [role, setRole] = useState("")
     const [disabled, setDisabled] = useState(false)
 
     useEffect(() => {
@@ -34,7 +35,7 @@ export default function Home() {
             return
         }
 
-        const response = await axios.post("/api/subscription", { name, events: selectedEvents })
+        const response = await axios.post("/api/subscription", { name, events: selectedEvents, role })
 
         response.status === 201 ? alert("Cadastro realizado com sucesso!") : alert("Erro ao cadastrar!")
         setName("");
@@ -63,6 +64,34 @@ export default function Home() {
                                 required />
                         </Form.Group>
 
+                        <Form.Group className="mb-3">
+                            <Form.Check
+                                onChange={(e) => setRole(e.target.value)}
+                                type="radio"
+                                label="Vocal"
+                                value="Vocal"
+                                name="role"
+                                required
+                            />
+                            <Form.Check
+                                type="radio"
+                                onChange={(e) => setRole(e.target.value)}
+                                label="Tocar"
+                                value="Tocar"
+                                name="role"
+                                required
+                            />
+                            <Form.Check
+                                type="radio"
+                                onChange={(e) => setRole(e.target.value)}
+                                label="Cabine"
+                                value="Cabine"
+                                name="role"
+                                required
+                            />
+                        </Form.Group>
+
+
                         <Form.Group>
                             <Form.Text className="text-muted">
                                 Selecione os dias que você está disponível.
@@ -74,7 +103,7 @@ export default function Home() {
                                         key={index}
                                         name={e.name}
                                         type="checkbox"
-                                        label={`${e.name} - ${e.date}`}
+                                        label={`${e.date} - ${e.name}`}
                                     />
                                 )
                             })

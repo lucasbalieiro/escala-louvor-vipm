@@ -9,7 +9,7 @@ async function connectToDatabase(uri: string | undefined) {
     if (!uri) {
         throw new Error('Please define the MONGODB_URI environment variable inside .env')
     }
-    
+
     if (cachedDb) {
         return cachedDb
     }
@@ -29,9 +29,9 @@ async function connectToDatabase(uri: string | undefined) {
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (req.method === 'POST') {
-        const { eventName, eventDate} = req.body
+        const { eventName, eventDate } = req.body
 
-        const db  = await connectToDatabase(process.env.MONGODB_URI)
+        const db = await connectToDatabase(process.env.MONGODB_URI)
 
         const collection = db.collection('events')
 
@@ -44,7 +44,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     if (req.method === 'GET') {
-        const db  = await connectToDatabase(process.env.MONGODB_URI)
+        const db = await connectToDatabase(process.env.MONGODB_URI)
 
         const collection = db.collection('events')
 
