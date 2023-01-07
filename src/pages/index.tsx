@@ -23,7 +23,6 @@ export default function Home() {
 
     return (
         <>
-            <NavBar />
             <Container>
                 <Row xl={12} className="text-center">
                     <h1>Escala do Grupo de Louvor</h1>
