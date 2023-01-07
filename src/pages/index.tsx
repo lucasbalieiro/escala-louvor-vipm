@@ -14,6 +14,8 @@ type EventType = {
 export default function Home() {
 
     const [events, setEvents] = useState([] as EventType[])
+    const [name, setName] = useState("")
+    const [disabled, setDisabled] = useState(false)
 
     useEffect(() => {
         axios.get("/api/events")
@@ -23,6 +25,25 @@ export default function Home() {
             )
     }, [])
 
+    async function handleSubmitEvent(event: any) {
+        event.preventDefault();
+        setDisabled(true)
+
+        const selectedEvents = events.filter((e: EventType) => event.target.elements[e.name].checked)
+        if (selectedEvents.length <= 0) {
+            alert("Selecione pelo menos um dia!")
+            setDisabled(false)
+            return
+        }
+
+        const response = await axios.post("/api/subscription", { name, events: selectedEvents })
+
+        response.status === 201 ? alert("Cadastro realizado com sucesso!") : alert("Erro ao cadastrar!")
+        setName("");
+        setDisabled(false)
+
+    }
+
     return (
         <>
             <Container>
@@ -31,10 +52,17 @@ export default function Home() {
                     <p>{GetMonthName(new Date().getMonth())}</p>
                 </Row>
                 <Row>
-                    <Form>
+                    <Form
+                        onSubmit={handleSubmitEvent}
+                    >
                         <Form.Group className="mb-3">
                             <Form.Label>Seu Nome</Form.Label>
-                            <Form.Control type="text" placeholder="Digite seu nome" required />
+                            <Form.Control
+                                type="text"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                placeholder="Digite seu nome"
+                                required />
                         </Form.Group>
 
                         <Form.Group>
@@ -46,6 +74,7 @@ export default function Home() {
                                 return (
                                     <Form.Check
                                         key={index}
+                                        name={e.name}
                                         type="checkbox"
                                         label={`${e.name} - ${e.date}`}
                                     />
@@ -54,7 +83,7 @@ export default function Home() {
                             }
                         </Form.Group>
 
-                        <Button variant="primary" type="submit" disabled={events.length <= 0} >
+                        <Button variant="primary" type="submit" disabled={events.length <= 0 || disabled} >
                             Cadastrar
                         </Button>
                     </Form>
