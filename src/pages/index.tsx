@@ -1,9 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Container, Form, Row } from "react-bootstrap";
-import NavBar from "../components/NavBar";
 import { GetMonthName } from "../services/GetMonthName";
-import { getSchedule } from "../services/GetSchedule";
 
 
 type EventType = {
