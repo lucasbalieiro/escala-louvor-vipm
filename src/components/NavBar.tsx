@@ -10,7 +10,7 @@ export default function NavBar() {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 <NavLink href="/" label="Cadastrar na Escala" />
-                <NavLink href="/list" label="Lista de Escala" />
+                <NavLink href="/listSchedule" label="Lista de Escala" />
                 <NavLink href="/addEvent" label="Adicionar Evento" />
               </Nav>
             </Navbar.Collapse>

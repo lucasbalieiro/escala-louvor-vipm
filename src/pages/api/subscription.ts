@@ -55,5 +55,21 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             res.status(201).json({ message: 'Subscription inserted!' });
     
         }
+
+        if (req.method === 'GET') {
+
+            const db = await connectToDatabase(process.env.MONGODB_URI);
+
+            let collection = db.collection('events');
+
+            const events = await collection.find().toArray();
+
+            collection = db.collection('subscribers');
+
+            const subscribers = await collection.find().toArray();
+
+            return res.status(200).json({ events, subscribers });
+
+        }
     
     }
