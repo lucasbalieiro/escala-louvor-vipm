@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Container, Form, Row } from "react-bootstrap";
 import NavBar from "../components/NavBar";
@@ -7,7 +8,7 @@ import { getSchedule } from "../services/GetSchedule";
 
 type EventType = {
     date: string;
-    event: string;
+    name: string;
 }
 
 export default function Home() {
@@ -15,10 +16,11 @@ export default function Home() {
     const [events, setEvents] = useState([] as EventType[])
 
     useEffect(() => {
-        getSchedule().then((data) => {
-            console.log(data)
-            setEvents(data)
-        })
+        axios.get("/api/events")
+            .then(response => {
+                setEvents(response.data)
+            }
+            )
     }, [])
 
     return (
@@ -40,11 +42,12 @@ export default function Home() {
                                 Selecione os dias que você está disponível.
                             </Form.Text>
 
-                            {events.map((e) => {
+                            {events.map((e, index) => {
                                 return (
                                     <Form.Check
+                                        key={index}
                                         type="checkbox"
-                                        label={`${e.event} - ${e.date}`}
+                                        label={`${e.name} - ${e.date}`}
                                     />
                                 )
                             })

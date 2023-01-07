@@ -9,7 +9,7 @@ export default function AddEvent() {
 
     async function  handleSubmitEvent(event:FormEvent) {
         event.preventDefault();
-        const response = await axios.post("/api/addEvent", {eventName, eventDate})
+        const response = await axios.post("/api/events", {eventName, eventDate})
         response.status === 201 ? alert("Evento adicionado com sucesso!") : alert("Erro ao adicionar evento!")
         setEventName("");
         setEventDate("");
