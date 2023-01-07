@@ -23,13 +23,12 @@ export default function ListSchedule() {
     return (
         <Container>
             <h1>Lista de Escala</h1>
-            <Row className="justify-content-md-center">
+            <Row>
                 {events.map((event, index) => (
-                    <Col
+                    <Col xs={12} md={6} lg={4} xl={3}
                         key={index}
                         style={{ marginBottom: "10px" }}
                     >
-
                         <EventCard
                             key={index}
                             eventName={event.name}
