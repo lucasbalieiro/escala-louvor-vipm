@@ -76,8 +76,8 @@ export default function Home() {
                             <Form.Check
                                 type="radio"
                                 onChange={(e) => setRole(e.target.value)}
-                                label="Tocar"
-                                value="Tocar"
+                                label="Instrumental"
+                                value="Instrumental"
                                 name="role"
                                 required
                             />
