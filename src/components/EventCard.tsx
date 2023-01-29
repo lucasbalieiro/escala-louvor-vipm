@@ -26,7 +26,7 @@ export default function EventCard({ eventName, date, subscriptions }: EventCardP
         <Card.Text>
           {subscriptions.sort((a, b) => a.role.localeCompare(b.role)).map((subscription, index) => (
             subscription.events.map((event, index) => (
-              event.date === date && <span style={{display: "block"}} key={index}>{subscription.name} - {subscription.role}</span>
+              event.date === date && event.name === eventName && <span style={{display: "block"}} key={index}>{subscription.name} - {subscription.role}</span>
             ))
           ))}
         </Card.Text>

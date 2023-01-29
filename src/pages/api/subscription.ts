@@ -42,8 +42,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         if (req.method === 'POST') {
     
             const { name, events, role } = req.body;
-
-            console.log(name, events, role);
     
             const db = await connectToDatabase(process.env.MONGODB_URI);
     
