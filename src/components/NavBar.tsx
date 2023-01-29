@@ -12,6 +12,7 @@ export default function NavBar() {
                 <NavLink href="/" label="Cadastrar na Escala" />
                 <NavLink href="/listSchedule" label="Lista de Escala" />
                 <NavLink href="/addEvent" label="Adicionar Evento" />
+                <NavLink href="/admin" label="Admin" />
               </Nav>
             </Navbar.Collapse>
           </Container>
