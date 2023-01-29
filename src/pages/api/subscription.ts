@@ -41,11 +41,17 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     
         if (req.method === 'POST') {
     
-            const { name, events, role } = req.body;
+            const { name, events, role } = req.body;            
     
             const db = await connectToDatabase(process.env.MONGODB_URI);
     
             const collection = db.collection('subscribers');
+
+            const alreadySubscribed = await collection.findOne({name, role, events: {$elemMatch: {$in: events}}})
+            
+            if (alreadySubscribed) {
+                return res.status(409).json({ message: 'Already subscribed!' });
+            }
 
             await collection.insertOne({
                 name,

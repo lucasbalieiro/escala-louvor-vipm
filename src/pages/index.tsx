@@ -35,9 +35,17 @@ export default function Home() {
             return
         }
 
-        const response = await axios.post("/api/subscription", { name, events: selectedEvents, role })
+        const result = await axios.post("/api/subscription", { name, events: selectedEvents, role })
+        .catch(err => {
+            return err.response
+        })
 
-        response.status === 201 ? alert("Cadastro realizado com sucesso!") : alert("Erro ao cadastrar!")
+        if (result.status === 409) {
+            alert("Você já está cadastrado para os eventos selecionados e para essa funcao!")
+            setDisabled(false)
+            return
+        }
+        result.status === 201 ? alert("Cadastro realizado com sucesso!") : alert("Erro ao cadastrar!")
         setName("");
         setDisabled(false)
 
